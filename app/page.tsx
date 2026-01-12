@@ -4,7 +4,7 @@ import React from 'react';
 import { Github, Linkedin, FileText, Mail, ExternalLink, Code2, Database, Layout, Server, MapPin } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-// 2. IMPORT HÌNH ẢNH (GIỮ NGUYÊN)
+// 2. IMPORT HÌNH ẢNH
 import avatarImg from './images/avata3.png';
 import aboutImg from './images/sonkon5.png';
 
@@ -88,7 +88,6 @@ const scaleUp = {
 
 // --- COMPONENTS ---
 
-// 1. Navbar (Đơn giản hóa, bỏ Dark Mode, bỏ Mobile Menu)
 const Navbar = () => (
   <motion.nav 
     initial={{ y: -100 }}
@@ -100,8 +99,6 @@ const Navbar = () => (
       <a href="#" className="font-bold text-xl text-gray-900 flex items-center gap-2">
         <Code2 className="text-blue-600"/> SonkonIT
       </a>
-      
-      {/* Chỉ hiển thị trên Desktop, ẩn trên mobile */}
       <div className="hidden md:flex space-x-8 text-gray-600 font-medium">
         {['Home', 'About', 'Skills', 'Projects', 'Contact'].map((item) => (
           <a key={item} href={`#${item.toLowerCase()}`} className="hover:text-blue-600 transition relative group">
@@ -114,96 +111,42 @@ const Navbar = () => (
   </motion.nav>
 );
 
-// 2. Hero Section (Xóa Dark Mode logic)
 const Hero = () => (
   <section id="home" className="min-h-screen flex items-center justify-center pt-16 bg-gradient-to-br from-blue-50 to-white overflow-hidden relative">
-    {/* Hiệu ứng nền */}
-    <motion.div 
-      animate={{ x: [0, 50, 0], y: [0, -30, 0] }} 
-      transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-      className="absolute top-20 left-10 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30"
-    />
-    <motion.div 
-      animate={{ x: [0, -50, 0], y: [0, 30, 0] }} 
-      transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-      className="absolute bottom-20 right-10 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30"
-    />
+    <motion.div animate={{ x: [0, 50, 0], y: [0, -30, 0] }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }} className="absolute top-20 left-10 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30" />
+    <motion.div animate={{ x: [0, -50, 0], y: [0, 30, 0] }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }} className="absolute bottom-20 right-10 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30" />
 
     <div className="max-w-6xl mx-auto px-4 z-10 w-full">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        
-        {/* Cột Trái: Thông tin Text */}
-        <motion.div 
-          initial="hidden" animate="visible" variants={staggerContainer}
-          className="order-2 md:order-1 text-center md:text-left"
-        >
+        <motion.div initial="hidden" animate="visible" variants={staggerContainer} className="order-2 md:order-1 text-center md:text-left">
           <motion.div variants={fadeInUp}>
-             <span className="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-4">
-                👋 Welcome to my portfolio
-             </span>
+             <span className="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-4">👋 Welcome to my portfolio</span>
           </motion.div>
-
           <motion.h1 variants={fadeInUp} className="text-4xl md:text-6xl font-bold text-gray-900 mb-4 tracking-tight">
-            Hi, I'm <br/>
-            <span className="text-blue-600">{PORTFOLIO_DATA.personal.name}</span>
+            Hi, I'm <br/><span className="text-blue-600">{PORTFOLIO_DATA.personal.name}</span>
           </motion.h1>
-          
-          <motion.p variants={fadeInUp} className="text-xl md:text-2xl text-gray-600 font-medium mb-4">
-            {PORTFOLIO_DATA.personal.title}
-          </motion.p>
-
+          <motion.p variants={fadeInUp} className="text-xl md:text-2xl text-gray-600 font-medium mb-4">{PORTFOLIO_DATA.personal.title}</motion.p>
           <motion.div variants={fadeInUp} className="flex items-center justify-center md:justify-start gap-2 text-gray-500 mb-6 font-medium">
-            <MapPin className="w-5 h-5 text-red-500" /> 
-            <span>{PORTFOLIO_DATA.personal.location}</span>
+            <MapPin className="w-5 h-5 text-red-500" /> <span>{PORTFOLIO_DATA.personal.location}</span>
           </motion.div>
-
-          <motion.p variants={fadeInUp} className="text-gray-500 mb-8 text-lg font-light max-w-lg mx-auto md:mx-0">
-            {PORTFOLIO_DATA.personal.tagline}
-          </motion.p>
-          
+          <motion.p variants={fadeInUp} className="text-gray-500 mb-8 text-lg font-light max-w-lg mx-auto md:mx-0">{PORTFOLIO_DATA.personal.tagline}</motion.p>
           <motion.div variants={fadeInUp} className="flex justify-center md:justify-start gap-4 flex-wrap">
-            <motion.a
-              whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
-              href={PORTFOLIO_DATA.personal.links.cv} download
-              className="flex items-center gap-2 bg-gray-900 text-white px-6 py-3 rounded-full hover:bg-gray-800 transition shadow-lg"
-            >
+            <motion.a whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} href={PORTFOLIO_DATA.personal.links.cv} download className="flex items-center gap-2 bg-gray-900 text-white px-6 py-3 rounded-full hover:bg-gray-800 transition shadow-lg">
               <FileText size={20} /> Download CV
             </motion.a>
-            <motion.a
-              whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
-              href={PORTFOLIO_DATA.personal.links.linkedin} target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-white text-gray-700 border border-gray-200 px-6 py-3 rounded-full hover:border-blue-500 hover:text-blue-500 transition shadow-sm"
-            >
+            <motion.a whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} href={PORTFOLIO_DATA.personal.links.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-white text-gray-700 border border-gray-200 px-6 py-3 rounded-full hover:border-blue-500 hover:text-blue-500 transition shadow-sm">
               <Linkedin size={20} /> LinkedIn
             </motion.a>
-             <motion.a
-              whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
-              href={PORTFOLIO_DATA.personal.links.github} target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-white text-gray-700 border border-gray-200 px-6 py-3 rounded-full hover:border-black transition shadow-sm"
-            >
+             <motion.a whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} href={PORTFOLIO_DATA.personal.links.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-white text-gray-700 border border-gray-200 px-6 py-3 rounded-full hover:border-black transition shadow-sm">
               <Github size={20} /> GitHub
             </motion.a>
           </motion.div>
         </motion.div>
-
-        {/* Cột Phải: Avatar */}
-        <motion.div 
-          initial="hidden" animate="visible" variants={scaleUp}
-          className="order-1 md:order-2 flex justify-center md:justify-end relative group"
-        >
+        <motion.div initial="hidden" animate="visible" variants={scaleUp} className="order-1 md:order-2 flex justify-center md:justify-end relative group">
            <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur-3xl opacity-30 group-hover:opacity-50 transition duration-500"></div>
            <div className="relative w-64 h-64 md:w-80 md:h-80">
-             <img 
-               src={PORTFOLIO_DATA.personal.avatar} 
-               alt="Profile" 
-               className="w-full h-full rounded-full object-cover border-4 border-white shadow-2xl relative z-10"
-             />
-              <motion.span 
-               initial={{ scale: 0 }}
-               animate={{ scale: 1 }}
-               transition={{ delay: 0.5, type: "spring" }}
-               className="absolute bottom-8 right-8 bg-green-500 w-6 h-6 border-4 border-white rounded-full z-20"
-             ></motion.span>
+             <img src={PORTFOLIO_DATA.personal.avatar} alt="Profile" className="w-full h-full rounded-full object-cover border-4 border-white shadow-2xl relative z-10" />
+              <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.5, type: "spring" }} className="absolute bottom-8 right-8 bg-green-500 w-6 h-6 border-4 border-white rounded-full z-20"></motion.span>
            </div>
         </motion.div>
       </div>
@@ -211,40 +154,20 @@ const Hero = () => (
   </section>
 );
 
-// 3. About Section (Đã làm sạch Dark Mode)
 const About = () => (
   <section id="about" className="py-24 bg-white scroll-mt-16 overflow-hidden">
     <div className="max-w-6xl mx-auto px-4">
-      <motion.h2 
-        initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-        className="text-3xl font-bold text-gray-900 mb-16 text-center decoration-blue-500 underline decoration-4 underline-offset-8"
-      >
-        About Me
-      </motion.h2>
-      
+      <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-3xl font-bold text-gray-900 mb-16 text-center decoration-blue-500 underline decoration-4 underline-offset-8">About Me</motion.h2>
       <div className="grid md:grid-cols-2 gap-12 items-center">
-        <motion.div 
-          initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
-          className="relative group"
-        >
+        <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="relative group">
           <div className="absolute inset-0 bg-blue-600 rounded-2xl rotate-3 opacity-20 group-hover:rotate-6 transition duration-300"></div>
           <img src={PORTFOLIO_DATA.about.image} alt="About" className="relative rounded-2xl shadow-lg w-full h-[400px] object-cover border border-gray-100" />
         </motion.div>
-
-        <motion.div
-           initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
-        >
-          <h3 className="text-2xl font-bold text-gray-800 mb-4">
-            Hello, I'm <span className="text-blue-600">Nguyễn Quốc Sơn</span>
-          </h3>
-          <p className="text-lg text-gray-600 leading-relaxed mb-6 text-justify">
-            {PORTFOLIO_DATA.about.summary}
-          </p>
-          
+        <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+          <h3 className="text-2xl font-bold text-gray-800 mb-4">Hello, I'm <span className="text-blue-600">Nguyễn Quốc Sơn</span></h3>
+          <p className="text-lg text-gray-600 leading-relaxed mb-6 text-justify">{PORTFOLIO_DATA.about.summary}</p>
           <div className="bg-gray-50 p-6 rounded-xl border border-gray-100 hover:shadow-md transition duration-300">
-             <h4 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                <span className="w-2 h-8 bg-blue-500 rounded-full"></span> Education
-             </h4>
+             <h4 className="font-semibold text-gray-900 mb-4 flex items-center gap-2"><span className="w-2 h-8 bg-blue-500 rounded-full"></span> Education</h4>
              {PORTFOLIO_DATA.about.education.map((edu, idx) => (
               <div key={idx} className="flex justify-between items-start md:items-center flex-col md:flex-row mb-2">
                 <div>
@@ -252,9 +175,7 @@ const About = () => (
                   <p className="text-gray-600">{edu.major}</p>
                 </div>
                 <div className="mt-2 md:mt-0 text-right">
-                  <span className="inline-block bg-blue-100 text-blue-700 px-4 py-1 rounded-full text-sm font-semibold">
-                    {edu.time}
-                  </span>
+                  <span className="inline-block bg-blue-100 text-blue-700 px-4 py-1 rounded-full text-sm font-semibold">{edu.time}</span>
                   <p className="text-sm text-gray-500 mt-1 font-medium">GPA: {edu.gpa}</p>
                 </div>
               </div>
@@ -266,35 +187,20 @@ const About = () => (
   </section>
 );
 
-// 4. Skills Section (Đã làm sạch Dark Mode)
 const Skills = () => (
   <section id="skills" className="py-24 bg-gray-50 scroll-mt-16">
     <div className="max-w-6xl mx-auto px-4">
-      <motion.h2 
-        initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-        className="text-3xl font-bold text-gray-900 mb-12 text-center decoration-blue-500 underline decoration-4 underline-offset-8"
-      >
-        Technical Skills
-      </motion.h2>
-      
-      <motion.div 
-        variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
-      >
+      <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-3xl font-bold text-gray-900 mb-12 text-center decoration-blue-500 underline decoration-4 underline-offset-8">Technical Skills</motion.h2>
+      <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {PORTFOLIO_DATA.skills.map((skillGroup, idx) => (
-          <motion.div 
-            key={idx} variants={fadeInUp} whileHover={{ y: -5 }}
-            className="bg-white p-6 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100"
-          >
+          <motion.div key={idx} variants={fadeInUp} whileHover={{ y: -5 }} className="bg-white p-6 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100">
             <div className="flex items-center gap-3 mb-4 text-blue-600">
               {skillGroup.icon}
               <h3 className="font-bold text-gray-900">{skillGroup.category}</h3>
             </div>
             <div className="flex flex-wrap gap-2">
               {skillGroup.items.map((item, i) => (
-                <span key={i} className="px-3 py-1 bg-gray-100 text-gray-700 rounded-md text-sm font-medium hover:bg-blue-50 hover:text-blue-600 transition cursor-default">
-                  {item}
-                </span>
+                <span key={i} className="px-3 py-1 bg-gray-100 text-gray-700 rounded-md text-sm font-medium hover:bg-blue-50 hover:text-blue-600 transition cursor-default">{item}</span>
               ))}
             </div>
           </motion.div>
@@ -304,57 +210,51 @@ const Skills = () => (
   </section>
 );
 
-// 5. Projects Section (Đã làm sạch Dark Mode)
+// --- UPDATE PROJECTS SECTION (CÁCH 2) ---
 const Projects = () => (
   <section id="projects" className="py-24 bg-white scroll-mt-16">
     <div className="max-w-6xl mx-auto px-4">
-      <motion.h2 
-        initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-        className="text-3xl font-bold text-gray-900 mb-12 text-center decoration-blue-500 underline decoration-4 underline-offset-8"
-      >
-        Featured Projects
-      </motion.h2>
+      <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-3xl font-bold text-gray-900 mb-12 text-center decoration-blue-500 underline decoration-4 underline-offset-8">Featured Projects</motion.h2>
 
-      <motion.div 
-        variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-      >
+      <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {PORTFOLIO_DATA.projects.map((project, idx) => (
-          <motion.div 
-            key={idx} variants={fadeInUp} whileHover={{ y: -10 }}
-            className="group bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col"
-          >
+          <motion.div key={idx} variants={fadeInUp} whileHover={{ y: -10 }} className="group bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col">
+            
+            {/* Ảnh dự án - Bỏ lớp phủ icon khi hover để tránh lỗi double-tap trên mobile */}
             <div className="h-48 overflow-hidden relative bg-gray-200">
-              <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center gap-4 z-10 backdrop-blur-sm">
-                <motion.a 
-                  whileHover={{ scale: 1.1 }} href={project.github} target="_blank" rel="noreferrer" 
-                  className="bg-white p-3 rounded-full shadow-lg" title="View Code"
-                >
-                  <Github size={20} className="text-gray-900" />
-                </motion.a>
-                <motion.a 
-                  whileHover={{ scale: 1.1 }} href={project.demo} target="_blank" rel="noreferrer" 
-                  className="bg-white p-3 rounded-full shadow-lg" title="View Demo"
-                >
-                  <ExternalLink size={20} className="text-gray-900" />
-                </motion.a>
-              </div>
               <img src={project.image} alt={project.name} className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
             </div>
             
             <div className="p-6 flex-1 flex flex-col">
-              <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition">
-                {project.name}
-              </h3>
-              <p className="text-gray-600 text-sm mb-4 flex-1 line-clamp-3">
-                {project.desc}
-              </p>
-              <div className="flex flex-wrap gap-2 mt-auto">
+              <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition">{project.name}</h3>
+              <p className="text-gray-600 text-sm mb-4 flex-1 line-clamp-3">{project.desc}</p>
+              
+              <div className="flex flex-wrap gap-2 mb-6">
                 {project.tech.map((t, i) => (
-                  <span key={i} className="text-xs font-semibold text-blue-700 bg-blue-50 px-2 py-1 rounded border border-blue-100">
-                    {t}
-                  </span>
+                  <span key={i} className="text-xs font-semibold text-blue-700 bg-blue-50 px-2 py-1 rounded border border-blue-100">{t}</span>
                 ))}
+              </div>
+
+              {/* HÀNG NÚT BẤM MỚI (Cập nhật Cách 2): Hiện rõ ràng ở cả Desktop và Mobile */}
+              <div className="flex gap-3 mt-auto pt-4 border-t border-gray-100">
+                <motion.a 
+                  whileTap={{ scale: 0.95 }}
+                  href={project.github} 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-gray-100 text-gray-700 rounded-lg text-sm font-bold hover:bg-gray-200 transition"
+                >
+                  <Github size={16} /> Code
+                </motion.a>
+                <motion.a 
+                  whileTap={{ scale: 0.95 }}
+                  href={project.demo} 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-blue-600 text-white rounded-lg text-sm font-bold hover:bg-blue-700 transition shadow-md shadow-blue-100"
+                >
+                  <ExternalLink size={16} /> Demo
+                </motion.a>
               </div>
             </div>
           </motion.div>
@@ -364,42 +264,25 @@ const Projects = () => (
   </section>
 );
 
-// 6. Contact Section (Giữ style tối màu cho Footer nhưng bỏ Dark Mode toggle)
 const Contact = () => (
   <section id="contact" className="py-24 bg-gray-900 text-white text-center scroll-mt-16">
-    <motion.div 
-      initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
-      className="max-w-2xl mx-auto px-4"
-    >
+    <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="max-w-2xl mx-auto px-4">
       <h2 className="text-3xl font-bold mb-8">Let's Work Together</h2>
-      <p className="text-gray-400 mb-12 text-lg">
-        Tôi đang tìm kiếm cơ hội Intern/Fresher Frontend Developer.
-        <br />Sẵn sàng di chuyển và làm việc tại {PORTFOLIO_DATA.personal.location}.
-      </p>
-      
+      <p className="text-gray-400 mb-12 text-lg">Tôi đang tìm kiếm cơ hội Intern/Fresher Frontend Developer. <br />Sẵn sàng di chuyển và làm việc tại {PORTFOLIO_DATA.personal.location}.</p>
       <div className="flex flex-col md:flex-row justify-center items-center gap-6 mb-12">
-        <motion.a 
-          whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.2)" }} whileTap={{ scale: 0.95 }}
-          href={`mailto:${PORTFOLIO_DATA.personal.email}`} 
-          className="flex items-center gap-3 text-xl transition bg-white/10 px-6 py-3 rounded-full backdrop-blur-sm"
-        >
+        <motion.a whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.2)" }} whileTap={{ scale: 0.95 }} href={`mailto:${PORTFOLIO_DATA.personal.email}`} className="flex items-center gap-3 text-xl transition bg-white/10 px-6 py-3 rounded-full backdrop-blur-sm">
           <Mail /> {PORTFOLIO_DATA.personal.email}
         </motion.a>
       </div>
-
       <div className="flex justify-center gap-8 border-t border-gray-800 pt-8">
         <motion.a whileHover={{ y: -5, color: "#fff" }} href={PORTFOLIO_DATA.personal.links.github} className="text-gray-500 transition"><Github size={24}/></motion.a>
         <motion.a whileHover={{ y: -5, color: "#3b82f6" }} href={PORTFOLIO_DATA.personal.links.linkedin} className="text-gray-500 transition"><Linkedin size={24}/></motion.a>
       </div>
-      
-      <p className="text-gray-600 text-sm mt-12">
-        © 2024 {PORTFOLIO_DATA.personal.name}. Built with React & Tailwind CSS.
-      </p>
+      <p className="text-gray-600 text-sm mt-12">© 2024 {PORTFOLIO_DATA.personal.name}. Built with React & Tailwind CSS.</p>
     </motion.div>
   </section>
 );
 
-// --- APP COMPONENT ---
 function App() {
   return (
     <div className="min-h-screen font-sans antialiased bg-white text-gray-900 scroll-smooth">
